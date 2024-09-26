@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.API", "SkillUpHub.Auth.API\SkillUpHub.Auth.API.csproj", "{D3F4AA87-D47F-4D7B-B6A0-C6D4975C548D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.Core", "SkillUpHub.Auth.Core\SkillUpHub.Auth.Core.csproj", "{F89AAB92-F76D-43C6-9742-2ED6A54F726D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.Data", "SkillUpHub.Auth.Data\SkillUpHub.Auth.Data.csproj", "{2C4D157B-6727-4867-AFD0-5F592F49CABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.Tests", "SkillUpHub.Auth.Tests\SkillUpHub.Auth.Tests.csproj", "{A0E87D36-14EC-430C-BC15-CA9EA77BD223}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3F4AA87-D47F-4D7B-B6A0-C6D4975C548D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3F4AA87-D47F-4D7B-B6A0-C6D4975C548D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3F4AA87-D47F-4D7B-B6A0-C6D4975C548D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3F4AA87-D47F-4D7B-B6A0-C6D4975C548D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F89AAB92-F76D-43C6-9742-2ED6A54F726D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F89AAB92-F76D-43C6-9742-2ED6A54F726D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F89AAB92-F76D-43C6-9742-2ED6A54F726D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F89AAB92-F76D-43C6-9742-2ED6A54F726D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4D157B-6727-4867-AFD0-5F592F49CABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4D157B-6727-4867-AFD0-5F592F49CABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4D157B-6727-4867-AFD0-5F592F49CABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4D157B-6727-4867-AFD0-5F592F49CABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E87D36-14EC-430C-BC15-CA9EA77BD223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E87D36-14EC-430C-BC15-CA9EA77BD223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E87D36-14EC-430C-BC15-CA9EA77BD223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E87D36-14EC-430C-BC15-CA9EA77BD223}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
