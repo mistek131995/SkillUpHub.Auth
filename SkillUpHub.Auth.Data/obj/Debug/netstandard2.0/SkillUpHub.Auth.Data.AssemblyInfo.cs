@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SkillUpHub.Auth.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bed5fcb6276a6d60852b129427c32f02e28d838f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dfdff4d864f39abe14b783a749aec4d8d4ebeff5")]
 [assembly: System.Reflection.AssemblyProductAttribute("SkillUpHub.Auth.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SkillUpHub.Auth.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
