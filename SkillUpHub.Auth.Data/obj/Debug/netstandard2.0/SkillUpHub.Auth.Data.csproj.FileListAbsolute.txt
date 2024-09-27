@@ -1,0 +1,11 @@
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\bin\Debug\netstandard2.0\SkillUpHub.Auth.Data.deps.json
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\bin\Debug\netstandard2.0\SkillUpHub.Auth.Data.dll
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\bin\Debug\netstandard2.0\SkillUpHub.Auth.Data.pdb
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.csproj.AssemblyReference.cache
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.AssemblyInfoInputs.cache
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.AssemblyInfo.cs
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.csproj.CoreCompileInputs.cache
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.sourcelink.json
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.dll
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.Data\obj\Debug\netstandard2.0\SkillUpHub.Auth.Data.pdb
