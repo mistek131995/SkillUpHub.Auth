@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using SkillUpHub.Auth.Data.Interfaces;
+using SkillUpHub.Auth.Data.Interfaces.Repositories;
+using SkillUpHub.Auth.Data.Repositories;
 
 namespace SkillUpHub.Auth.Data.Providers
 {
@@ -24,5 +26,7 @@ namespace SkillUpHub.Auth.Data.Providers
 
             return (T)repositories;
         }
+
+        public IUserRepository UserRepository => Get<UserRepository>();
     }
 }

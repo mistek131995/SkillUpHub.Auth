@@ -1,6 +1,6 @@
 ﻿namespace SkillUpHub.Auth.Data.Interfaces.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository
     {
         
     }
