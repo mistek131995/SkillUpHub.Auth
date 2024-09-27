@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\SkillUpHub.Auth.API.props" />
-</Project>
