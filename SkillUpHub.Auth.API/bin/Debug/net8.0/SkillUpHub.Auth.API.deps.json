@@ -8,7 +8,9 @@
     ".NETCoreApp,Version=v8.0": {
       "SkillUpHub.Auth.API/1.0.0": {
         "dependencies": {
-          "Grpc.AspNetCore": "2.57.0"
+          "Grpc.AspNetCore": "2.57.0",
+          "Grpc.AspNetCore.Web": "2.66.0",
+          "SkillUpHub.Auth.Core": "1.0.0"
         },
         "runtime": {
           "SkillUpHub.Auth.API.dll": {}
@@ -49,6 +51,14 @@
           "lib/net8.0/Grpc.AspNetCore.Server.ClientFactory.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.57.0.0"
+          }
+        }
+      },
+      "Grpc.AspNetCore.Web/2.66.0": {
+        "runtime": {
+          "lib/net8.0/Grpc.AspNetCore.Web.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.66.0.0"
           }
         }
       },
@@ -137,7 +147,20 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/6.0.0": {}
+      "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
+      "SkillUpHub.Auth.Core/1.0.0": {
+        "dependencies": {
+          "SkillUpHub.Auth.Data": "1.0.0"
+        },
+        "runtime": {
+          "SkillUpHub.Auth.Core.dll": {}
+        }
+      },
+      "SkillUpHub.Auth.Data/1.0.0": {
+        "runtime": {
+          "SkillUpHub.Auth.Data.dll": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -173,6 +196,13 @@
       "sha512": "sha512-Ucl50YKMMRaP/ikx20v6tDGdNaRzeiujmw8kmAFy3/4f8+d1mDY8wn3vcXpIflX4IE+WvZQOTHz5r/3/GutbQw==",
       "path": "grpc.aspnetcore.server.clientfactory/2.57.0",
       "hashPath": "grpc.aspnetcore.server.clientfactory.2.57.0.nupkg.sha512"
+    },
+    "Grpc.AspNetCore.Web/2.66.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MK8FM2Tud+HrRyZoK/Xz9WzBVGlIGyzTscOrgVThk8K1cKhhJ8rL410xeRcDGDtrAmJVLkFQBxlBk0Z1SX3GNA==",
+      "path": "grpc.aspnetcore.web/2.66.0",
+      "hashPath": "grpc.aspnetcore.web.2.66.0.nupkg.sha512"
     },
     "Grpc.Core.Api/2.57.0": {
       "type": "package",
@@ -271,6 +301,16 @@
       "sha512": "sha512-/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    },
+    "SkillUpHub.Auth.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SkillUpHub.Auth.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

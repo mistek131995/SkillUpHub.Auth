@@ -32,3 +32,9 @@ C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\obj\Debug\net8.
 C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\obj\Debug\net8.0\SkillUpHub.Auth.API.pdb
 C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\obj\Debug\net8.0\SkillUpHub.Auth.API.genruntimeconfig.cache
 C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\obj\Debug\net8.0\ref\SkillUpHub.Auth.API.dll
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\bin\Debug\net8.0\Grpc.AspNetCore.Web.dll
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\bin\Debug\net8.0\SkillUpHub.Auth.Core.dll
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\bin\Debug\net8.0\SkillUpHub.Auth.Data.dll
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\bin\Debug\net8.0\SkillUpHub.Auth.Core.pdb
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\bin\Debug\net8.0\SkillUpHub.Auth.Data.pdb
+C:\Users\omega\RiderProjects\SkillUpHub.Auth\SkillUpHub.Auth.API\obj\Debug\net8.0\SkillUpHub.Auth.API.sourcelink.json

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aiHJMhfbOvI=",
+  "dgSpecHash": "s2HCC+p0EEY=",
   "success": true,
   "projectFilePath": "C:\\Users\\omega\\RiderProjects\\SkillUpHub.Auth\\SkillUpHub.Auth.API\\SkillUpHub.Auth.API.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\omega\\.nuget\\packages\\grpc.aspnetcore\\2.57.0\\grpc.aspnetcore.2.57.0.nupkg.sha512",
     "C:\\Users\\omega\\.nuget\\packages\\grpc.aspnetcore.server\\2.57.0\\grpc.aspnetcore.server.2.57.0.nupkg.sha512",
     "C:\\Users\\omega\\.nuget\\packages\\grpc.aspnetcore.server.clientfactory\\2.57.0\\grpc.aspnetcore.server.clientfactory.2.57.0.nupkg.sha512",
+    "C:\\Users\\omega\\.nuget\\packages\\grpc.aspnetcore.web\\2.66.0\\grpc.aspnetcore.web.2.66.0.nupkg.sha512",
     "C:\\Users\\omega\\.nuget\\packages\\grpc.core.api\\2.57.0\\grpc.core.api.2.57.0.nupkg.sha512",
     "C:\\Users\\omega\\.nuget\\packages\\grpc.net.client\\2.57.0\\grpc.net.client.2.57.0.nupkg.sha512",
     "C:\\Users\\omega\\.nuget\\packages\\grpc.net.clientfactory\\2.57.0\\grpc.net.clientfactory.2.57.0.nupkg.sha512",
