@@ -1,8 +1,10 @@
 ﻿SkillUpHub.Auth.API/bin/
 SkillUpHub.Auth.API/obj/
-SkillUpHub.Auth.Core/bin/
-SkillUpHub.Auth.Core/obj/
-SkillUpHub.Auth.Data/bin/
-SkillUpHub.Auth.Data/obj/
+SkillUpHub.Auth.Domain/bin/
+SkillUpHub.Auth.Domain/obj/
+SkillUpHub.Auth.Infrastructure/bin/
+SkillUpHub.Auth.Infrastructure/obj/
 SkillUpHub.Auth.Tests/bin/
 SkillUpHub.Auth.Tests/obj/
+SkillUpHub.Auth.Application/bin/
+SkillUpHub.Auth.Application/obj/
