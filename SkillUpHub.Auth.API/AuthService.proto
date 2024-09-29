@@ -7,23 +7,34 @@ package AuthService;
 service AuthService{
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc RestorePassword(RestorePasswordRequest) returns (RestorePasswordResponse);
 }
 
 message LoginRequest{
-  string login = 1;
-  string password = 2;
+  string Login = 1;
+  string Password = 2;
+  string Token = 3;
 }
 
 message LoginResponse{
-  string token = 1;
+  string Token = 1;
 }
 
 message RegisterRequest{
   string Login = 1;
   string Password = 2;
   string Email = 3;
+  string Token = 4;
 }
 
 message RegisterResponse{
-  bool isSuccess = 1;
+  bool IsSuccess = 1;
+}
+
+message RestorePasswordRequest{
+  string Email = 1;
+}
+
+message RestorePasswordResponse{
+  bool IsSuccess = 1;
 }
