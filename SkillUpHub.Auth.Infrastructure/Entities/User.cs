@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SkillUpHub.Auth.Data.Entities;
+namespace SkillUpHub.Auth.Infrastructure.Entities;
 
 public class User
 {

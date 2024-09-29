@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace SkillUpHub.Auth.Data.Migrations
+namespace SkillUpHub.Auth.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

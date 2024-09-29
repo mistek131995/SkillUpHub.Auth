@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using SkillUpHub.Auth.Data.Contexts;
+using SkillUpHub.Auth.Domain.Providers;
+using SkillUpHub.Auth.Infrastructure.Contexts;
+using SkillUpHub.Auth.Infrastructure.Providers;
 using SkillUpHub.Auth.Services;
+using IServiceProvider = SkillUpHub.Auth.Domain.Providers.IServiceProvider;
+using ServiceProvider = SkillUpHub.Auth.Application.Providers.ServiceProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,9 @@ builder.Services.AddGrpc();
 
 builder.Services.AddDbContext<PGContext>(option => 
     option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IServiceProvider, ServiceProvider>();
+builder.Services.AddScoped<IRepositoryProvider, RepositoryProvider>();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {

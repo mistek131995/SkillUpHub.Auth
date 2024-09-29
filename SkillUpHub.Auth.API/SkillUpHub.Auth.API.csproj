@@ -18,18 +18,18 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Include="AuthService.proto">
-            <GrpcServices>Server</GrpcServices>
-            <Access>Public</Access>
-            <ProtoCompile>True</ProtoCompile>
-            <CompileOutputs>True</CompileOutputs>
-            <OutputDir>obj\Debug\net8.0\</OutputDir>
-            <Generator>MSBuild:Compile</Generator>
-        </Protobuf>
+      <Protobuf Include="Proto\AuthServices.proto">
+        <GrpcServices>Server</GrpcServices>
+        <Access>Public</Access>
+        <ProtoCompile>True</ProtoCompile>
+        <CompileOutputs>True</CompileOutputs>
+        <OutputDir>obj\Debug\net8.0\</OutputDir>
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SkillUpHub.Auth.Core\SkillUpHub.Auth.Core.csproj" />
+      <ProjectReference Include="..\SkillUpHub.Auth.Application\SkillUpHub.Auth.Application.csproj" />
     </ItemGroup>
 
 </Project>

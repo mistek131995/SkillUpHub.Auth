@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SkillUpHub.Auth.Data.Contexts;
+using SkillUpHub.Auth.Infrastructure.Contexts;
 
 #nullable disable
 
-namespace SkillUpHub.Auth.Data.Migrations
+namespace SkillUpHub.Auth.Infrastructure.Migrations
 {
     [DbContext(typeof(PGContext))]
     partial class PGContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace SkillUpHub.Auth.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SkillUpHub.Auth.Data.Entities.User", b =>
+            modelBuilder.Entity("SkillUpHub.Auth.Infrastructure.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

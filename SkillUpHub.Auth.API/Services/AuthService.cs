@@ -1,9 +1,9 @@
 ﻿using Grpc.Core;
-using SkillUpHub;
+using IServiceProvider = SkillUpHub.Auth.Domain.Providers.IServiceProvider;
 
 namespace SkillUpHub.Auth.Services;
 
-public class AuthService : SkillUpHub.AuthService.AuthServiceBase
+public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthService.AuthServiceBase
 {
     public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
     {

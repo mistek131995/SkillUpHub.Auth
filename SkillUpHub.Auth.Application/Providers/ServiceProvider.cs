@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
-using SkillUpHub.Auth.Core.Interfaces;
-using SkillUpHub.Auth.Core.Interfaces.Services;
-using SkillUpHub.Auth.Core.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SkillUpHub.Auth.Application.Services;
+using SkillUpHub.Auth.Domain.Services;
+using IProviderService = SkillUpHub.Auth.Domain.Providers.IServiceProvider;
 
-namespace SkillUpHub.Auth.Core.Providers;
+namespace SkillUpHub.Auth.Application.Providers;
 
-public class CoreServiceProvider(IServiceProvider serviceProvider) : ICoreServiceProvider
+public class ServiceProvider(IServiceProvider serviceProvider) : IProviderService
 {
     private readonly Dictionary<Type, IBaseService> _services = new();
     
@@ -15,7 +13,7 @@ public class CoreServiceProvider(IServiceProvider serviceProvider) : ICoreServic
     {
         var type = typeof(T);
 
-        if (_services.TryGetValue(type, out IBaseService service))
+        if (_services.TryGetValue(type, out var service))
         {
             return (T)service;
         }
@@ -26,6 +24,7 @@ public class CoreServiceProvider(IServiceProvider serviceProvider) : ICoreServic
 
         return (T)service;
     }
+
 
     public IAuthService AuthService => Get<AuthService>();
 }

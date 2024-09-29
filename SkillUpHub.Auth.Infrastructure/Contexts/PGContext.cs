@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SkillUpHub.Auth.Data.Entities;
+using SkillUpHub.Auth.Infrastructure.Entities;
 
-namespace SkillUpHub.Auth.Data.Contexts;
+namespace SkillUpHub.Auth.Infrastructure.Contexts;
 
 public class PGContext(DbContextOptions<PGContext> options) : DbContext(options)
 {
