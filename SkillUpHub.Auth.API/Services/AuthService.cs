@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using SkillUpHub.Auth.Contract.Services;
 using IServiceProvider = SkillUpHub.Auth.Contract.Providers.IServiceProvider;
 
 namespace SkillUpHub.Auth.Services;
@@ -15,9 +16,15 @@ public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthServ
 
     public override async Task<RegisterResponse> Register(RegisterRequest request, ServerCallContext context)
     {
+        var userId = await serviceProvider.AuthService.CreateUserAsync(new IAuthService.UserDTO(
+            request.Login, 
+            request.Password,
+            request.Email, 
+            request.Token));
+        
         return new RegisterResponse()
         {
-            IsSuccess = true,
+            IsSuccess = userId != default,
         };
     }
 

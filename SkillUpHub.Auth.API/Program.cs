@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SkillUpHub.Auth.Contract.Providers;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Providers;
+using SkillUpHub.Auth.Middlewares;
 using SkillUpHub.Auth.Services;
 using IServiceProvider = SkillUpHub.Auth.Contract.Providers.IServiceProvider;
 using ServiceProvider = SkillUpHub.Auth.Application.Providers.ServiceProvider;
@@ -9,7 +10,10 @@ using ServiceProvider = SkillUpHub.Auth.Application.Providers.ServiceProvider;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddGrpc();
+builder.Services.AddGrpc(options =>
+{
+    options.Interceptors.Add<GrpcExceptionInterceptor>(); // Регистрируем Interceptor
+});
 
 builder.Services.AddDbContext<PGContext>(option => 
     option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
