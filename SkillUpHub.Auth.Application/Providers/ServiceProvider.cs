@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SkillUpHub.Auth.Application.Services;
-using SkillUpHub.Auth.Domain.Services;
-using IProviderService = SkillUpHub.Auth.Domain.Providers.IServiceProvider;
+using SkillUpHub.Auth.Contract.Services;
+using IProviderService = SkillUpHub.Auth.Contract.Providers.IServiceProvider;
 
 namespace SkillUpHub.Auth.Application.Providers;
 

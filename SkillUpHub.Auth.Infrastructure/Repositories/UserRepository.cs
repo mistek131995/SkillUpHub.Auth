@@ -1,4 +1,4 @@
-﻿using SkillUpHub.Auth.Domain.Repositories;
+﻿using SkillUpHub.Auth.Contract.Repositories;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 
 namespace SkillUpHub.Auth.Infrastructure.Repositories

@@ -1,6 +1,6 @@
-﻿using SkillUpHub.Auth.Domain.Repositories;
+﻿using SkillUpHub.Auth.Contract.Repositories;
 
-namespace SkillUpHub.Auth.Domain.Providers
+namespace SkillUpHub.Auth.Contract.Providers
 {
     public interface IRepositoryProvider
     {

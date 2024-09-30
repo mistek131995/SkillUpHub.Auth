@@ -1,4 +1,4 @@
-﻿namespace SkillUpHub.Auth.Domain.Services
+﻿namespace SkillUpHub.Auth.Contract.Services
 {
     public interface IAuthService : IBaseService
     {

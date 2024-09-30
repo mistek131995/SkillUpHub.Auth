@@ -1,6 +1,6 @@
 ﻿using SkillUpHub.Auth.Data.Interfaces;
 
-namespace SkillUpHub.Auth.Domain.Repositories
+namespace SkillUpHub.Auth.Contract.Repositories
 {
     public interface IUserRepository : IBaseRepository
     {

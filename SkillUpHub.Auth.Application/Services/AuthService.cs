@@ -1,5 +1,5 @@
-﻿using SkillUpHub.Auth.Domain.Providers;
-using SkillUpHub.Auth.Domain.Services;
+﻿using SkillUpHub.Auth.Contract.Providers;
+using SkillUpHub.Auth.Contract.Services;
 
 namespace SkillUpHub.Auth.Application.Services
 {

@@ -1,5 +1,5 @@
 ﻿using Grpc.Core;
-using IServiceProvider = SkillUpHub.Auth.Domain.Providers.IServiceProvider;
+using IServiceProvider = SkillUpHub.Auth.Contract.Providers.IServiceProvider;
 
 namespace SkillUpHub.Auth.Services;
 

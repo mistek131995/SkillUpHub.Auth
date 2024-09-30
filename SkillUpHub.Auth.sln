@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.API", "SkillUpHub.Auth.API\SkillUpHub.Auth.API.csproj", "{D3F4AA87-D47F-4D7B-B6A0-C6D4975C548D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.Domain", "SkillUpHub.Auth.Domain\SkillUpHub.Auth.Domain.csproj", "{F89AAB92-F76D-43C6-9742-2ED6A54F726D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.Contract", "SkillUpHub.Auth.Contract\SkillUpHub.Auth.Contract.csproj", "{F89AAB92-F76D-43C6-9742-2ED6A54F726D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillUpHub.Auth.Infrastructure", "SkillUpHub.Auth.Infrastructure\SkillUpHub.Auth.Infrastructure.csproj", "{2C4D157B-6727-4867-AFD0-5F592F49CABE}"
 EndProject
