@@ -8,15 +8,17 @@ public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthServ
 {
     public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
     {
+        var token = await serviceProvider.AuthService.LoginAsync(new IAuthService.LoginUserDTO(request.Login, request.Password));
+        
         return new LoginResponse()
         {
-            Token = "Token",
+            Token = token,
         };
     }
 
     public override async Task<RegisterResponse> Register(RegisterRequest request, ServerCallContext context)
     {
-        var userId = await serviceProvider.AuthService.CreateUserAsync(new IAuthService.UserDTO(
+        var userId = await serviceProvider.AuthService.CreateUserAsync(new IAuthService.CreateUserDTO(
             request.Login, 
             request.Password,
             request.Email, 

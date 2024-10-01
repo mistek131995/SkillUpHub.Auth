@@ -5,7 +5,12 @@ namespace SkillUpHub.Auth.Contract.Services
 {
     public interface IAuthService : IBaseService
     {
-        record UserDTO(string Login, string Password, string Email, string Token);
-        Task<Guid> CreateUserAsync(UserDTO user);
+        record CreateUserDTO(string Login, string Password, string Email, string Token);
+        Task<Guid> CreateUserAsync(CreateUserDTO user);
+        
+        record LoginUserDTO(string Login, string Password);
+        Task<string> LoginAsync(LoginUserDTO user);
     }
+    
+    
 }
