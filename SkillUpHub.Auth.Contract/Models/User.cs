@@ -2,26 +2,14 @@
 
 namespace SkillUpHub.Auth.Contract.Models;
 
-public class User
+public class User(Guid id, string login, string password, string email)
 {
-    public Guid Id { get; set; }
-    public string Login { get; set; }
-    public string Password { get; set; }
-    public string Email { get; set; }
+    public Guid Id { get; set; } = id;
+    public string Login { get; set; } = login;
+    public string Password { get; set; } = password;
+    public string Email { get; set; } = email;
 
-    public User(Guid id, string login, string password, string email)
+    public User(string login, string password, string email) : this(Guid.NewGuid(), login, password, email)
     {
-        Id = id;
-        Login = login;
-        Password = password;
-        Email = email;
-    }
-    
-    public User(string login, string password, string email)
-    {
-        Id = Guid.NewGuid();
-        Login = login;
-        Password = password;
-        Email = email;
     }
 }

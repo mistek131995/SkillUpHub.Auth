@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,4 +15,6 @@ public class User
     public string Email { get; set; }
     [MaxLength(250)]
     public string Password { get; set; }
+    
+    public List<RefreshToken> RefreshTokens { get; set; }
 }
