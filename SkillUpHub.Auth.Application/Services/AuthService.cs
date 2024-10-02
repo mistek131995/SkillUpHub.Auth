@@ -1,10 +1,15 @@
-﻿using SkillUpHub.Auth.Contract.Models;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using SkillUpHub.Auth.Contract.Models;
 using SkillUpHub.Auth.Contract.Providers;
 using SkillUpHub.Auth.Contract.Services;
 
 namespace SkillUpHub.Auth.Application.Services
 {
-    public class AuthService(IRepositoryProvider repositoryProvider) : IAuthService
+    public class AuthService(IRepositoryProvider repositoryProvider, IConfiguration configuration) : IAuthService
     {
         public async Task<Guid> CreateUserAsync(IAuthService.CreateUserDTO user)
         {
@@ -31,10 +36,31 @@ namespace SkillUpHub.Auth.Application.Services
 
             if (BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password))
             {
-                return "Token";
+                return GenerateToken(user.Login);
             }
 
             throw new Exception("Пользователь с таким логином и паролем не найден.");
+        }
+
+        private string GenerateToken(string login)
+        {
+            var key = configuration.GetSection("SecretKey").Value;
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Name, login),
+                new Claim("Id", Guid.NewGuid().ToString())
+            };
+            
+            var token = new JwtSecurityToken(
+                issuer: "SkillHub.Auth", 
+                audience: "SkillHub.Services", 
+                claims: claims, expires: DateTime.Now.AddMinutes(5), 
+                signingCredentials: credentials);
+            
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
