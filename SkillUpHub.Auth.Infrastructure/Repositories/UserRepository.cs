@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SkillUpHub.Auth.Contract.Models;
 using SkillUpHub.Auth.Contract.Repositories;
 using SkillUpHub.Auth.Infrastructure.Contexts;
+using SkillUpHub.Auth.Infrastructure.Mapping;
 using EUser = SkillUpHub.Auth.Infrastructure.Entities.User;
 
 namespace SkillUpHub.Auth.Infrastructure.Repositories
@@ -14,57 +15,51 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
     {
         public async Task<User> GetByIdAsync(Guid id)
         {
-            return await context.Users
+            var mapper = new UserMapper();
+            var dbUser = await context.Users
                 .AsNoTracking()
                 .Where(x => x.Id == id)
-                .Select(x => new User(x.Id, x.Login, x.Password, x.Email))
                 .FirstOrDefaultAsync();
+
+            return mapper.MappingToContractModel(dbUser);
         }
 
         public async Task<List<User>> GetByIdsAsync(List<Guid> ids)
         {
-            return await context.Users
+            var mapper = new UserMapper();
+            var dbUsers = await context.Users
                 .AsNoTracking()
                 .Where(x => ids.Contains(x.Id))
-                .Select(x => new User(x.Id, x.Login, x.Password, x.Email))
                 .ToListAsync();
+            
+            return mapper.MappingToContractModel(dbUsers);
         }
 
         
         public async Task<User> GetByEmailAsync(string email)
         {
-            var userId = (await context.Users.FirstOrDefaultAsync(x => x.Email == email))?.Id;
-            
-            if (userId == null)
-                return null;
+            var mapper = new UserMapper();
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Email == email);
 
-            return await GetByIdAsync(userId.Value);
+            return mapper.MappingToContractModel(user);
         }
 
         public async Task<User> GetByLoginAsync(string login)
         {
-            var userId = (await context.Users.FirstOrDefaultAsync(x => x.Login == login))?.Id;
-            
-            if (userId == null)
-                return null;
+            var mapper = new UserMapper();
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Login == login);
 
-            return await GetByIdAsync(userId.Value);
+            return mapper.MappingToContractModel(user);
         }
 
         public async Task<User> SaveAsync(User user)
         {
+            var mapper = new UserMapper();
             var dbUser = await context.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
             
             if (dbUser == null)
             {
-                dbUser = new EUser()
-                {
-                    Id = user.Id,
-                    Login = user.Login,
-                    Email = user.Email,
-                    Password = user.Password,
-                };
-                
+                dbUser = mapper.MappingToInfrastructureModel(user);
                 context.Add(dbUser);
             }
             else
