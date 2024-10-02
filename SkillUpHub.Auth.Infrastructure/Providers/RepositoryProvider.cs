@@ -30,5 +30,6 @@ namespace SkillUpHub.Auth.Infrastructure.Providers
         }
 
         public IUserRepository UserRepository => Get<UserRepository>();
+        public IRefreshTokenRepository RefreshTokenRepository => Get<RefreshTokenRepository>();
     }
 }
