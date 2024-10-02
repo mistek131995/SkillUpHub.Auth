@@ -23,10 +23,11 @@ builder.Services.AddScoped<IRepositoryProvider, RepositoryProvider>();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {
-    builder.AllowAnyOrigin()
+    builder.WithOrigins("http://localhost:3000")
         .AllowAnyMethod()
         .AllowAnyHeader()
-        .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding");
+        .WithExposedHeaders("Grpc-Status", "Grpc-Message", "Grpc-Encoding", "Grpc-Accept-Encoding")
+        .AllowCredentials();
 }));
 
 
