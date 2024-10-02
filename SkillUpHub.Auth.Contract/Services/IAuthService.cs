@@ -9,7 +9,7 @@ namespace SkillUpHub.Auth.Contract.Services
         Task<Guid> CreateUserAsync(CreateUserDTO user);
         
         record LoginUserDTO(string Login, string Password);
-        Task<string> LoginAsync(LoginUserDTO user);
+        Task<(string accessToken, string refreshToken)> LoginAsync(LoginUserDTO user);
     }
     
     

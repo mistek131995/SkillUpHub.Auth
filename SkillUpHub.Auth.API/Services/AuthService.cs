@@ -12,7 +12,8 @@ public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthServ
         
         return new LoginResponse()
         {
-            Token = token,
+            AccessToken = token.accessToken,
+            RefreshToken = token.refreshToken
         };
     }
 
@@ -36,5 +37,10 @@ public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthServ
         {
             IsSuccess = true,
         };
+    }
+
+    public override Task<RefreshTokenResponse> RefreshToken(RefreshTokenRequest request, ServerCallContext context)
+    {
+        return base.RefreshToken(request, context);
     }
 }

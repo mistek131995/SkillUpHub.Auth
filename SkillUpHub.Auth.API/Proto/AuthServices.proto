@@ -9,6 +9,7 @@ service AuthService{
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc RestorePassword(RestorePasswordRequest) returns (RestorePasswordResponse);
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
 }
 
 message LoginRequest{
@@ -18,7 +19,8 @@ message LoginRequest{
 }
 
 message LoginResponse{
-  string Token = 1;
+  string AccessToken = 1;
+  string RefreshToken = 2;
 }
 
 message RegisterRequest{
@@ -38,4 +40,13 @@ message RestorePasswordRequest{
 
 message RestorePasswordResponse{
   bool IsSuccess = 1;
+}
+
+message RefreshTokenRequest{
+  string RefreshToken = 1;
+}
+
+message RefreshTokenResponse{
+  string AccessToken = 1;
+  string RefreshToken = 2;
 }

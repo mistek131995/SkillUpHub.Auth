@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -29,20 +30,23 @@ namespace SkillUpHub.Auth.Application.Services
             return dbUser.Id;
         }
 
-        public async Task<string> LoginAsync(IAuthService.LoginUserDTO user)
+        public async Task<(string accessToken, string refreshToken)> LoginAsync(IAuthService.LoginUserDTO user)
         {
             var dbUser = await repositoryProvider.UserRepository.GetByLoginAsync(user.Login) ??
                          throw new Exception("Пользователь с таким логином и паролем не найден");
 
             if (BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password))
             {
-                return GenerateToken(user.Login);
+                var accessToken = GenerateAccessToken(user.Login);
+                var refreshToken = GenerateRefreshToken();
+                
+                return (accessToken, refreshToken);
             }
 
             throw new Exception("Пользователь с таким логином и паролем не найден.");
         }
 
-        private string GenerateToken(string login)
+        private string GenerateAccessToken(string login)
         {
             var key = configuration.GetSection("SecretKey").Value;
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
@@ -61,6 +65,16 @@ namespace SkillUpHub.Auth.Application.Services
                 signingCredentials: credentials);
             
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private string GenerateRefreshToken(int length = 32)
+        {
+            var randomNumber = new byte[length];
+            
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            
+            return Convert.ToBase64String(randomNumber);
         }
     }
 }
