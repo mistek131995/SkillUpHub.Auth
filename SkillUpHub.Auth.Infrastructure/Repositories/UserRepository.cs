@@ -39,7 +39,9 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
         public async Task<User> GetByEmailAsync(string email)
         {
             var mapper = new UserMapper();
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Email == email);
+            var user = await context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Email == email);
 
             return mapper.MappingToContractModel(user);
         }
@@ -47,7 +49,9 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
         public async Task<User> GetByLoginAsync(string login)
         {
             var mapper = new UserMapper();
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Login == login);
+            var user = await context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Login == login);
 
             return mapper.MappingToContractModel(user);
         }
@@ -55,19 +59,14 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
         public async Task<User> SaveAsync(User user)
         {
             var mapper = new UserMapper();
-            var dbUser = await context.Users.FirstOrDefaultAsync(x => x.Id == user.Id);
+            var dbUser = mapper.MappingToInfrastructureModel(user);
+
+            var existingUser = await context.Users.FindAsync(dbUser.Id);
             
-            if (dbUser == null)
-            {
-                dbUser = mapper.MappingToInfrastructureModel(user);
-                context.Add(dbUser);
-            }
+            if (existingUser != null)
+                context.Entry(existingUser).CurrentValues.SetValues(dbUser);
             else
-            {
-                dbUser.Login = user.Login;
-                dbUser.Password = user.Password;
-                dbUser.Email = user.Email;
-            }
+                context.Users.Add(dbUser);
             
             await context.SaveChangesAsync();
             

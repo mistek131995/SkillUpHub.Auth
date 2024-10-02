@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SkillUpHub.Auth.Contract.Models;
@@ -18,20 +20,28 @@ public class RefreshTokenRepository(PGContext context) : IRefreshTokenRepository
         return mapping.MappingToContractModel(refreshToken);
     }
 
-    public async Task<RefreshToken> GetByUserIdAsync(Guid userId)
+    public async Task<List<RefreshToken>> GetByUserIdAsync(Guid userId)
     {
         var mapping = new RefreshTokenMapper();
-        var refreshToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.UserId == userId);
+        var refreshTokens = await context.RefreshTokens
+            .Where(t => t.UserId == userId)
+            .ToListAsync();
         
-        return mapping.MappingToContractModel(refreshToken);
+        return mapping.MappingToContractModels(refreshTokens);
     }
 
     public async Task<RefreshToken> SaveAsync(RefreshToken refreshToken)
     {
         var mapping = new RefreshTokenMapper();
-
         var dbRefreshToken = mapping.MappingToInfrastructureModel(refreshToken);
-        context.RefreshTokens.Add(dbRefreshToken);
+        
+        var existingRefreshToken = await context.RefreshTokens.FindAsync(dbRefreshToken.Id);
+        
+        if (existingRefreshToken != null)
+            context.Entry(existingRefreshToken).CurrentValues.SetValues(dbRefreshToken);
+        else
+            context.RefreshTokens.Add(dbRefreshToken);
+        
         await context.SaveChangesAsync();
 
         return refreshToken;

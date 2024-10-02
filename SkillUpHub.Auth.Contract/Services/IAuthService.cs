@@ -8,7 +8,7 @@ namespace SkillUpHub.Auth.Contract.Services
         record CreateUserDTO(string Login, string Password, string Email, string Token);
         Task<Guid> CreateUserAsync(CreateUserDTO user);
         
-        record LoginUserDTO(string Login, string Password);
+        record LoginUserDTO(string Login, string Password, string UserAgent, string FingerPrint);
         Task<(string accessToken, string refreshToken)> LoginAsync(LoginUserDTO user);
     }
     

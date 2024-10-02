@@ -8,10 +8,10 @@ public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthServ
 {
     public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
     {
-        var token = await serviceProvider.AuthService.LoginAsync(new IAuthService.LoginUserDTO(request.Login, request.Password));
-
-        // Получаем HttpContext из ServerCallContext
         var httpContext = context.GetHttpContext();
+        var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
+        var fingerprint = httpContext.Request.Headers["Fingerprint"].ToString();
+        var token = await serviceProvider.AuthService.LoginAsync(new IAuthService.LoginUserDTO(request.Login, request.Password, userAgent, fingerprint));
 
         // Устанавливаем Cookie в заголовке Set-Cookie
         httpContext.Response.Cookies.Append("refreshToken", token.refreshToken, new CookieOptions

@@ -40,6 +40,17 @@ namespace SkillUpHub.Auth.Application.Services
                 var accessToken = GenerateAccessToken(user.Login);
                 var refreshToken = GenerateRefreshToken();
                 
+                var userRefreshTokens = await repositoryProvider.RefreshTokenRepository.GetByUserIdAsync(dbUser.Id);
+                var curToken = userRefreshTokens
+                    .FirstOrDefault(x => x.UserAgent == user.UserAgent && x.Fingerprint == user.FingerPrint);
+
+                if (curToken != null)
+                    curToken.Update(refreshToken);
+                else
+                    curToken = new RefreshToken(refreshToken, user.FingerPrint, user.UserAgent, dbUser.Id);
+
+                await repositoryProvider.RefreshTokenRepository.SaveAsync(curToken);
+                
                 return (accessToken, refreshToken);
             }
 
