@@ -20,7 +20,6 @@ message LoginRequest{
 
 message LoginResponse{
   string AccessToken = 1;
-  string RefreshToken = 2;
 }
 
 message RegisterRequest{
@@ -48,5 +47,4 @@ message RefreshTokenRequest{
 
 message RefreshTokenResponse{
   string AccessToken = 1;
-  string RefreshToken = 2;
 }

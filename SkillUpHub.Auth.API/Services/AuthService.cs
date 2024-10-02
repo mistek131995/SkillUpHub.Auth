@@ -9,11 +9,11 @@ public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthServ
     public override async Task<LoginResponse> Login(LoginRequest request, ServerCallContext context)
     {
         var token = await serviceProvider.AuthService.LoginAsync(new IAuthService.LoginUserDTO(request.Login, request.Password));
+        context.ResponseTrailers.Add("Set-Cookie", $"refreshToken={token.refreshToken}; HttpOnly; Secure; SameSite=Strict; Path=/");
         
         return new LoginResponse()
         {
             AccessToken = token.accessToken,
-            RefreshToken = token.refreshToken
         };
     }
 
