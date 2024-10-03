@@ -32,4 +32,9 @@ public class RefreshToken(
         ExpiryDate = DateTime.UtcNow.AddDays(15);
         CreateDate = DateTime.UtcNow;
     }
+
+    public bool TokenIsValid(string token, string fingerprint, string userAgent)
+    {
+        return Token == token && Fingerprint == fingerprint && UserAgent == userAgent && ExpiryDate < DateTime.UtcNow && !IsRevoked;
+    }
 }

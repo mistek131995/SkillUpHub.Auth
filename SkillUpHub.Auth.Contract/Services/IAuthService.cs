@@ -10,6 +10,9 @@ namespace SkillUpHub.Auth.Contract.Services
         
         record LoginUserDTO(string Login, string Password, string UserAgent, string FingerPrint);
         Task<(string accessToken, string refreshToken)> LoginAsync(LoginUserDTO user);
+        
+        record RefreshTokenDTO(string Token, string userAgent, string fingerPrint);
+        Task<string> RefreshAccessToken(RefreshTokenDTO refreshToken);
     }
     
     

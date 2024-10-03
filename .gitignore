@@ -10,4 +10,5 @@ SkillUpHub.Auth.Application/bin/
 SkillUpHub.Auth.Application/obj/
 Dockerfile
 build.bat
-SkillUpHub.Auth.API/appsettings.json
+.github/
+.idea/

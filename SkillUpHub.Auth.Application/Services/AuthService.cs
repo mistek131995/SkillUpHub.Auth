@@ -57,6 +57,22 @@ namespace SkillUpHub.Auth.Application.Services
             throw new Exception("Пользователь с таким логином и паролем не найден.");
         }
 
+        public async Task<string> RefreshAccessToken(IAuthService.RefreshTokenDTO refreshToken)
+        {
+            var dbRefreshToken = await repositoryProvider.RefreshTokenRepository.GetByToken(refreshToken.Token) 
+                                 ?? throw new Exception("Ошибка аутентификации");
+
+            var isTokenValid = dbRefreshToken.TokenIsValid(refreshToken.Token, dbRefreshToken.Fingerprint, dbRefreshToken.UserAgent);
+
+            if (!isTokenValid)
+                throw new Exception("Ошибка аутентификации");
+
+            var user = await repositoryProvider.UserRepository.GetByIdAsync(dbRefreshToken.UserId) ??
+                       throw new Exception("Пользователь не найден");
+            
+            return GenerateAccessToken(user.Login);
+        }
+
         private string GenerateAccessToken(string login)
         {
             var key = configuration.GetSection("SecretKey").Value;

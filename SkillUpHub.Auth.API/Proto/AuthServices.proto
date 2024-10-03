@@ -1,4 +1,5 @@
 ﻿syntax = "proto3";
+import "google/protobuf/empty.proto";
 
 option csharp_namespace = "SkillUpHub";
 
@@ -9,7 +10,7 @@ service AuthService{
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc RestorePassword(RestorePasswordRequest) returns (RestorePasswordResponse);
-  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+  rpc RefreshToken(google.protobuf.Empty) returns (RefreshTokenResponse);
 }
 
 message LoginRequest{
@@ -42,7 +43,6 @@ message RestorePasswordResponse{
 }
 
 message RefreshTokenRequest{
-  string RefreshToken = 1;
 }
 
 message RefreshTokenResponse{

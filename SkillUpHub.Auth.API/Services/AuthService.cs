@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using SkillUpHub.Auth.Contract.Services;
 using IServiceProvider = SkillUpHub.Auth.Contract.Providers.IServiceProvider;
 
@@ -49,9 +50,22 @@ public class AuthService(IServiceProvider serviceProvider) : SkillUpHub.AuthServ
             IsSuccess = true,
         };
     }
-
-    public override Task<RefreshTokenResponse> RefreshToken(RefreshTokenRequest request, ServerCallContext context)
+    
+    public override async Task<RefreshTokenResponse> RefreshToken(Empty request, ServerCallContext context)
     {
-        return base.RefreshToken(request, context);
+        var httpContext = context.GetHttpContext();
+        var refreshToken = httpContext.Request.Cookies["refreshToken"];
+        var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
+        var fingerprint = httpContext.Request.Headers["Fingerprint"].ToString();
+        
+        var accessToken = await serviceProvider.AuthService.RefreshAccessToken(new IAuthService.RefreshTokenDTO(
+            refreshToken, 
+            userAgent, 
+            fingerprint));
+
+        return new RefreshTokenResponse()
+        {
+            AccessToken = accessToken,
+        };
     }
 }
