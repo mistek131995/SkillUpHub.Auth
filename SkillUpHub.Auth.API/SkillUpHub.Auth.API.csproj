@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>SkillUpHub.Auth</RootNamespace>
       <UserSecretsId>b1e55c72-f017-46d5-9a68-3f08666c33ba</UserSecretsId>
+      <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
     <ItemGroup>
