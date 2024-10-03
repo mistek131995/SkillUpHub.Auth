@@ -12,3 +12,4 @@ Dockerfile
 build.bat
 .github/
 .idea/
+/SkillUpHub.Auth.API/appsettings.json
