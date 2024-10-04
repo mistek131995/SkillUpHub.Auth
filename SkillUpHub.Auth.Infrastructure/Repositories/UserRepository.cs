@@ -15,23 +15,23 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
         public async Task<User> GetByIdAsync(Guid id)
         {
             var mapper = new UserMapper();
-            var dbUser = await context.Users
+            var user = await context.Users
                 .AsNoTracking()
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
-            return mapper.MappingToContractModel(dbUser);
+            return user == null ? null : mapper.MappingToContractModel(user);
         }
 
         public async Task<List<User>> GetByIdsAsync(List<Guid> ids)
         {
             var mapper = new UserMapper();
-            var dbUsers = await context.Users
+            var users = await context.Users
                 .AsNoTracking()
                 .Where(x => ids.Contains(x.Id))
                 .ToListAsync();
             
-            return mapper.MappingToContractModel(dbUsers);
+            return mapper.MappingToContractModel(users);
         }
 
         
@@ -42,7 +42,7 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Email == email);
 
-            return mapper.MappingToContractModel(user);
+            return user == null ? null : mapper.MappingToContractModel(user);
         }
 
         public async Task<User> GetByLoginAsync(string login)
@@ -52,7 +52,7 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Login == login);
 
-            return mapper.MappingToContractModel(user);
+            return user == null ? null : mapper.MappingToContractModel(user);
         }
 
         public async Task<User> SaveAsync(User user)

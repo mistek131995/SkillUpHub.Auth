@@ -17,7 +17,7 @@ public class RefreshTokenRepository(PGContext context) : IRefreshTokenRepository
         var mapping = new RefreshTokenMapper();
         var refreshToken = await context.RefreshTokens.FirstOrDefaultAsync(t => t.Token == token);
         
-        return mapping.MappingToContractModel(refreshToken);
+        return refreshToken == null ? null : mapping.MappingToContractModel(refreshToken);
     }
 
     public async Task<List<RefreshToken>> GetByUserIdAsync(Guid userId)

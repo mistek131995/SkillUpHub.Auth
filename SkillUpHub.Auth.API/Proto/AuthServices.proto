@@ -42,9 +42,6 @@ message RestorePasswordResponse{
   bool IsSuccess = 1;
 }
 
-message RefreshTokenRequest{
-}
-
 message RefreshTokenResponse{
   string AccessToken = 1;
 }
