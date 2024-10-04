@@ -16,7 +16,7 @@ namespace SkillUpHub.Auth.Infrastructure.Providers
         {
             var type = typeof(T);
             
-            if (_repositories.TryGetValue(typeof(T), out IBaseRepository repositories))
+            if (_repositories.TryGetValue(type, out IBaseRepository repositories))
             {
                 return (T)repositories;
             }
