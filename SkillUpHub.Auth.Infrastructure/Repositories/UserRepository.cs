@@ -7,7 +7,6 @@ using SkillUpHub.Auth.Contract.Models;
 using SkillUpHub.Auth.Contract.Repositories;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Mapping;
-using EUser = SkillUpHub.Auth.Infrastructure.Entities.User;
 
 namespace SkillUpHub.Auth.Infrastructure.Repositories
 {
