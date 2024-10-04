@@ -1,4 +1,5 @@
 ﻿using System;
+using UUIDNext;
 
 namespace SkillUpHub.Auth.Contract.Models;
 
@@ -22,7 +23,7 @@ public class RefreshToken(
     public Guid UserId { get; private set; } = userId;
     
 
-    public RefreshToken(string token, string fingerprint, string userAgent, Guid userId) : this(Guid.NewGuid(), token, DateTime.UtcNow.AddDays(15), fingerprint, userAgent, DateTime.UtcNow, userId)
+    public RefreshToken(string token, string fingerprint, string userAgent, Guid userId) : this(Uuid.NewDatabaseFriendly(Database.PostgreSql), token, DateTime.UtcNow.AddDays(15), fingerprint, userAgent, DateTime.UtcNow, userId)
     {
     }
 
