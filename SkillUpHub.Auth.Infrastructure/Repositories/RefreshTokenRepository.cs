@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SkillUpHub.Auth.Contract.Models;
 using SkillUpHub.Auth.Contract.Repositories;
 using SkillUpHub.Auth.Infrastructure.Contexts;
-using SkillUpHub.Auth.Infrastructure.Mapping;
+using SkillUpHub.Auth.Infrastructure.Mappers;
 
 namespace SkillUpHub.Auth.Infrastructure.Repositories;
 

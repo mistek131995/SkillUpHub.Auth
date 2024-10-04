@@ -3,7 +3,7 @@ using Riok.Mapperly.Abstractions;
 using CUserModel = SkillUpHub.Auth.Contract.Models.User;
 using IUserModel = SkillUpHub.Auth.Infrastructure.Entities.User;
 
-namespace SkillUpHub.Auth.Infrastructure.Mapping;
+namespace SkillUpHub.Auth.Infrastructure.Mappers;
 
 [Mapper]
 public partial class UserMapper
