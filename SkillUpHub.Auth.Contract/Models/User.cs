@@ -10,7 +10,9 @@ public class User(Guid id, string login, string password, string email)
     public string Password { get; set; } = password;
     public string Email { get; set; } = email;
 
-    public User(string login, string password, string email) : this(Uuid.NewDatabaseFriendly(Database.PostgreSql), login, password, email)
+    public User(string login, string password, string email) : this(Uuid.NewDatabaseFriendly(Database.PostgreSql), login, BCrypt.Net.BCrypt.HashPassword(password), email)
     {
     }
+
+    public bool IsPasswordValid(string password) => BCrypt.Net.BCrypt.Verify(password, Password);
 }

@@ -25,7 +25,7 @@ namespace SkillUpHub.Auth.Application.Services
                 throw new Exception("Пользователь с таким адресом электронной почты уже зарегистрирован.");
             
             //BCrypt.Verify("my password", passwordHash);
-            dbUser = await repositoryProvider.UserRepository.SaveAsync(new User(user.Login, BCrypt.Net.BCrypt.HashPassword(user.Password), user.Email));
+            dbUser = await repositoryProvider.UserRepository.SaveAsync(new User(user.Login, user.Password, user.Email));
 
             return dbUser.Id;
         }
@@ -35,7 +35,7 @@ namespace SkillUpHub.Auth.Application.Services
             var dbUser = await repositoryProvider.UserRepository.GetByLoginAsync(user.Login) ??
                          throw new Exception("Пользователь с таким логином и паролем не найден");
 
-            if (BCrypt.Net.BCrypt.Verify(user.Password, dbUser.Password))
+            if (dbUser.IsPasswordValid(user.Password))
             {
                 var accessToken = GenerateAccessToken(user.Login);
                 var refreshToken = GenerateRefreshToken();
