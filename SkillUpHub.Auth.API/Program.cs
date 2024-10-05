@@ -22,7 +22,8 @@ builder.Services.AddDbContext<PGContext>(option =>
 
 builder.Services.AddScoped<IServiceProvider, ServiceProvider>();
 builder.Services.AddScoped<IRepositoryProvider, RepositoryProvider>();
-builder.Services.AddScoped<IMessageBusClient, RabbitMqClient>();
+builder.Services.AddScoped<IMessageBusClient, RabbitMqClient>(x => 
+    new RabbitMqClient(builder.Configuration.GetSection("RabbitMqHost").Value));
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {

@@ -1,0 +1,1 @@
+docker run --name SkillHubAuthAPI --network skillhub -p 8080:8080 -d skillhub_auth_api

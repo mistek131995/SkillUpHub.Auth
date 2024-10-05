@@ -13,11 +13,11 @@ public sealed class RabbitMqClient : IMessageBusClient
     private readonly IConnection _connection;
     private readonly IModel _channel;
 
-    public RabbitMqClient()
+    public RabbitMqClient(string host)
     {
         var factory = new ConnectionFactory()
         {
-            HostName = "localhost",
+            HostName = host,
         };
         
         _connection = factory.CreateConnection();
@@ -26,6 +26,12 @@ public sealed class RabbitMqClient : IMessageBusClient
     
     public void PublishMessage<T>(T message, string routingKey)
     {
+        _channel.QueueDeclare(queue: routingKey, 
+            durable: true,
+            exclusive: false,
+            autoDelete: false,
+            arguments: null);
+        
         var jsonMessage = JsonConvert.SerializeObject(message);
         var body = Encoding.UTF8.GetBytes(jsonMessage);
 
