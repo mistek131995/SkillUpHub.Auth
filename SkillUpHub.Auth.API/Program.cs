@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using SkillUpHub.Auth.Contract.Clients;
 using SkillUpHub.Auth.Contract.Providers;
+using SkillUpHub.Auth.Infrastructure.Clients;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Providers;
 using SkillUpHub.Auth.Middlewares;
@@ -20,6 +22,7 @@ builder.Services.AddDbContext<PGContext>(option =>
 
 builder.Services.AddScoped<IServiceProvider, ServiceProvider>();
 builder.Services.AddScoped<IRepositoryProvider, RepositoryProvider>();
+builder.Services.AddScoped<IMessageBusClient, RabbitMqClient>();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {
