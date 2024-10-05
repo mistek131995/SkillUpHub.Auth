@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using SkillUpHub.Auth.Contract.Clients;
+using SkillUpHub.Auth.Application.Services;
 using SkillUpHub.Auth.Infrastructure.Clients;
 using SkillUpHub.Auth.Infrastructure.Contexts;
+using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Auth.Infrastructure.Providers;
 using SkillUpHub.Auth.Middlewares;
-using SkillUpHub.Auth.Services;
-using IServiceProvider = SkillUpHub.Auth.Application.Providers.IServiceProvider;
+using AuthService = SkillUpHub.Auth.Services.AuthService;
+using IServiceProvider = SkillUpHub.Auth.Application.Interfaces.IServiceProvider;
 using ServiceProvider = SkillUpHub.Auth.Application.Providers.ServiceProvider;
 
 var builder = WebApplication.CreateBuilder(args);

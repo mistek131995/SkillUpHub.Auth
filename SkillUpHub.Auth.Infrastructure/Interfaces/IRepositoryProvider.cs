@@ -1,6 +1,6 @@
 ﻿using SkillUpHub.Auth.Contract.Repositories;
 
-namespace SkillUpHub.Auth.Infrastructure.Providers
+namespace SkillUpHub.Auth.Infrastructure.Interfaces
 {
     public interface IRepositoryProvider
     {

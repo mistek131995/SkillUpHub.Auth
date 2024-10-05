@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace SkillUpHub.Auth.Contract.Services
+﻿namespace SkillUpHub.Auth.Application.Interfaces
 {
     public interface IAuthService : IBaseService
     {

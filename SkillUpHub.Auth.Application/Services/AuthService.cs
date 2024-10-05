@@ -4,13 +4,16 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using SkillUpHub.Auth.Application.Interfaces;
 using SkillUpHub.Auth.Contract.Models;
-using SkillUpHub.Auth.Contract.Services;
+using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Auth.Infrastructure.Providers;
 
 namespace SkillUpHub.Auth.Application.Services
 {
-    public class AuthService(IRepositoryProvider repositoryProvider, IConfiguration configuration) : IAuthService
+    public class AuthService(
+        IRepositoryProvider repositoryProvider, 
+        IConfiguration configuration, IMessageBusClient messageBusClient) : IAuthService
     {
         public async Task<Guid> CreateUserAsync(IAuthService.CreateUserDTO user)
         {
@@ -24,8 +27,9 @@ namespace SkillUpHub.Auth.Application.Services
             if (dbUser != null)
                 throw new Exception("Пользователь с таким адресом электронной почты уже зарегистрирован.");
             
-            //BCrypt.Verify("my password", passwordHash);
             dbUser = await repositoryProvider.UserRepository.SaveAsync(new User(user.Login, user.Password, user.Email));
+            
+            messageBusClient.PublishMessage<Guid>(dbUser.Id, "createUser");
 
             return dbUser.Id;
         }
