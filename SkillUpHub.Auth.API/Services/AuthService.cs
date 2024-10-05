@@ -1,7 +1,7 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using SkillUpHub.Auth.Contract.Services;
-using IServiceProvider = SkillUpHub.Auth.Contract.Providers.IServiceProvider;
+using IServiceProvider = SkillUpHub.Auth.Application.Providers.IServiceProvider;
 
 namespace SkillUpHub.Auth.Services;
 

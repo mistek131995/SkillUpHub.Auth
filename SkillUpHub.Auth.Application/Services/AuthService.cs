@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SkillUpHub.Auth.Contract.Models;
-using SkillUpHub.Auth.Contract.Providers;
 using SkillUpHub.Auth.Contract.Services;
+using SkillUpHub.Auth.Infrastructure.Providers;
 
 namespace SkillUpHub.Auth.Application.Services
 {
