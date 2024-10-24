@@ -90,8 +90,8 @@ namespace SkillUpHub.Auth.Application.Services
             };
             
             var token = new JwtSecurityToken(
-                issuer: "SkillHub.Auth", 
-                audience: "SkillHub.Services", 
+                issuer: "SkillHub.Auth",
+                audience: "SkillHub.Services",
                 claims: claims, expires: DateTime.Now.AddMinutes(5), 
                 signingCredentials: credentials);
             
