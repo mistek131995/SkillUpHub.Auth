@@ -11,3 +11,4 @@ SkillUpHub.Auth.Application/obj/
 .github/
 .idea/
 /SkillUpHub.Auth.API/appsettings.json
+.vs/
