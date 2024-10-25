@@ -3,22 +3,20 @@ using SkillUpHub.Auth.Extensions;
 using SkillUpHub.Auth.Infrastructure.Clients;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Interfaces;
-using SkillUpHub.Auth.Infrastructure.Providers;
-using IServiceProvider = SkillUpHub.Auth.Application.Interfaces.IServiceProvider;
-using ServiceProvider = SkillUpHub.Auth.Application.Providers.ServiceProvider;
+using SkillUpHub.Command.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<PGContext>(option =>
-    option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddCommands(builder.Configuration.GetConnectionString("DefaultConnection")!);
 
-builder.Services.AddScoped<IServiceProvider, ServiceProvider>();
-builder.Services.AddScoped<IRepositoryProvider, RepositoryProvider>();
 builder.Services.AddScoped<IMessageBusClient, RabbitMqClient>(x =>
     new RabbitMqClient(builder.Configuration.GetSection("RabbitMqHost").Value));
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.CustomSchemaIds(type => type.FullName); // Используем полное имя типа
+});
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", builder =>
 {
@@ -45,6 +43,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseCors("AllowAll");
-app.RegisterRoutes();
+app.RegisterRoutes(app.Services);
 
 app.Run();

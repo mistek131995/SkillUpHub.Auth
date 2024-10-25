@@ -1,17 +1,28 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SkillUpHub.Auth.Contract.Models;
+using SkillUpHub.Auth.Infrastructure.Interfaces;
 
 namespace SkillUpHub.Command.Application.Handlers.CreateUser
 {
-    internal class CommandHandler : IRequestHandler<Command, Guid>
+    internal class CommandHandler(IRepositoryProvider repositoryProvider, IMessageBusClient messageBusClient) : IRequestHandler<Command, Guid>
     {
-        public Task<Guid> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(Command request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var dbUser = await repositoryProvider.UserRepository.GetByLoginAsync(request.Login);
+
+            if (dbUser != null)
+                throw new Exception("Пользователь с таким логином уже зарегистрирован.");
+
+            dbUser = await repositoryProvider.UserRepository.GetByEmailAsync(request.Email);
+
+            if (dbUser != null)
+                throw new Exception("Пользователь с таким адресом электронной почты уже зарегистрирован.");
+
+            dbUser = await repositoryProvider.UserRepository.SaveAsync(new User(request.Login, request.Password, request.Email));
+
+            messageBusClient.PublishMessage(dbUser.Id, "createUser");
+
+            return dbUser.Id;
         }
     }
 }
