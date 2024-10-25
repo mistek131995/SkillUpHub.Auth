@@ -43,6 +43,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseCors("AllowAll");
-app.RegisterRoutes(app.Services);
+app.RegisterRoutes();
 
 app.Run();
