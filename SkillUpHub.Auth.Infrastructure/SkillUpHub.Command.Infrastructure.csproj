@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SkillUpHub.Auth.Contract\SkillUpHub.Auth.Contract.csproj" />
+      <ProjectReference Include="..\SkillUpHub.Auth.Contract\SkillUpHub.Command.Contract.csproj" />
     </ItemGroup>
 
 </Project>

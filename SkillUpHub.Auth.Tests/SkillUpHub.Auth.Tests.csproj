@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SkillUpHub.Auth.Infrastructure\SkillUpHub.Auth.Infrastructure.csproj" />
+      <ProjectReference Include="..\SkillUpHub.Auth.Infrastructure\SkillUpHub.Command.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
