@@ -3,6 +3,7 @@ using SkillUpHub.Auth.Extensions;
 using SkillUpHub.Auth.Infrastructure.Clients;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Interfaces;
+using SkillUpHub.Auth.Middlewares;
 using SkillUpHub.Command.Application;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,5 +45,5 @@ using (var scope = app.Services.CreateScope())
 
 app.UseCors("AllowAll");
 app.RegisterRoutes();
-
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.Run();
