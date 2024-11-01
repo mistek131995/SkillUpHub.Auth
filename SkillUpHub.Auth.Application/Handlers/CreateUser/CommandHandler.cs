@@ -4,7 +4,7 @@ using SkillUpHub.Auth.Infrastructure.Interfaces;
 
 namespace SkillUpHub.Command.Application.Handlers.CreateUser
 {
-    internal class CommandHandler(IRepositoryProvider repositoryProvider, IMessageBusClient messageBusClient) : IRequestHandler<Command, Guid>
+    public class CommandHandler(IRepositoryProvider repositoryProvider, IMessageBusClient messageBusClient) : IRequestHandler<Command, Guid>
     {
         public async Task<Guid> Handle(Command request, CancellationToken cancellationToken)
         {

@@ -6,16 +6,16 @@ using LoginIn = SkillUpHub.Command.Application.Handlers.LoginIn;
 
 namespace SkillUpHub.Auth.Routes
 {
-    public class Auth(IMediator mediator) : IApi
+    public class Auth : IApi
     {
         public void RegisterRoutes(WebApplication app)
         {
-            app.MapPost("/CreateUser", async ([FromBody]CreateUser.Command command) =>
+            app.MapPost("/CreateUser", async ([FromBody]CreateUser.Command command, IMediator mediator) =>
             {
                 return await mediator.Send(command);
             });
 
-            app.MapPost("/LoginIn", async ([FromBody]LoginIn.Command command, HttpContext context) =>
+            app.MapPost("/LoginIn", async ([FromBody]LoginIn.Command command, HttpContext context, IMediator mediator) =>
             {
                 var result = await mediator.Send(command);
 

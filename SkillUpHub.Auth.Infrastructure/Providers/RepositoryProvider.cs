@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
-using SkillUpHub.Auth.Data.Interfaces;
 using SkillUpHub.Auth.Contract.Repositories;
+using SkillUpHub.Auth.Data.Interfaces;
 using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Auth.Infrastructure.Repositories;
 using IServiceProvider = System.IServiceProvider;
 
-namespace SkillUpHub.Auth.Infrastructure.Providers
+namespace SkillUpHub.Command.Infrastructure.Providers
 {
     public class RepositoryProvider(IServiceProvider serviceProvider) : IRepositoryProvider
     {

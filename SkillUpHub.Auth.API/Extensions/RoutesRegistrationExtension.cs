@@ -9,10 +9,10 @@ namespace SkillUpHub.Auth.Extensions
             var apiTypes = typeof(Program).Assembly.GetTypes()
                 .Where(t => typeof(IApi).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
+            using var scope = app.Services.CreateScope();
             foreach (var type in apiTypes)
             {
-                var apiInstance = ActivatorUtilities.CreateInstance(app.Services, type) as IApi;
-
+                var apiInstance = Activator.CreateInstance(type) as IApi;
                 apiInstance?.RegisterRoutes(app);
             }
         }
