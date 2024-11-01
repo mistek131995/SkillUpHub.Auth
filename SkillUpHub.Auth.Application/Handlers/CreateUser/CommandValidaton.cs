@@ -2,16 +2,16 @@
 
 namespace SkillUpHub.Command.Application.Handlers.CreateUser
 {
-    internal class CommandValidaton : AbstractValidator<Command>
+    public class CommandValidation : AbstractValidator<Command>
     {
-        public CommandValidaton()
+        public CommandValidation()
         {
             RuleFor(x => x.Login)
                 .MinimumLength(5).WithMessage("Минимальная длина логина 5 символов")
-                .MaximumLength(20).WithMessage("Максимальная длина логина 20 символов");
+                .MaximumLength(25).WithMessage("Максимальная длина логина 25 символов");
 
             RuleFor(x => x.Password)
-                .MinimumLength(6).WithMessage("Минимальная длина пароля 6 символов")
+                .MinimumLength(8).WithMessage("Минимальная длина пароля 8 символов")
                 .MaximumLength(25).WithMessage("Максимальная длина пароля 25 символов");
 
             RuleFor(x => x.Email)
