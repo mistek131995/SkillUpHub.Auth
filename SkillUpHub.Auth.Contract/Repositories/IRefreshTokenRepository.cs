@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SkillUpHub.Auth.Contract.Models;
 using SkillUpHub.Auth.Data.Interfaces;
+using SkillUpHub.Command.Contract.Models;
 
 namespace SkillUpHub.Auth.Contract.Repositories;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Riok.Mapperly.Abstractions;
-using CRefreshToken = SkillUpHub.Auth.Contract.Models.RefreshToken;
+using CRefreshToken = SkillUpHub.Command.Contract.Models.RefreshToken;
 using IRefreshToken = SkillUpHub.Auth.Infrastructure.Entities.RefreshToken;
 
 namespace SkillUpHub.Auth.Infrastructure.Mappers;

@@ -7,6 +7,7 @@ using SkillUpHub.Auth.Contract.Models;
 using SkillUpHub.Auth.Contract.Repositories;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Mappers;
+using SkillUpHub.Command.Contract.Models;
 
 namespace SkillUpHub.Auth.Infrastructure.Repositories;
 

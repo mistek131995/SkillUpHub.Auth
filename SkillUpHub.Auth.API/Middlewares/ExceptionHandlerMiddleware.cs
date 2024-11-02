@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using FluentValidation;
+using SkillUpHub.Command.Application.Exceptions;
 
 namespace SkillUpHub.Auth.Middlewares;
 
@@ -21,7 +22,7 @@ public class ExceptionHandlerMiddleware(RequestDelegate next)
     {
         var type = exception.GetType();
         
-        if (type == typeof(ValidationException))
+        if (type == typeof(ValidationException) || type == typeof(HandledException))
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.Conflict;

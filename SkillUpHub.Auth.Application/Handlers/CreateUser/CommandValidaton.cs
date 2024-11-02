@@ -18,8 +18,8 @@ namespace SkillUpHub.Command.Application.Handlers.CreateUser
                 .MinimumLength(5).WithMessage("Минимальная длина электронной почты 5 символов")
                 .MaximumLength(25).WithMessage("Максимальная длина электронной почты 25 символов");
 
-            RuleFor(x => x.CaptchaToken)
-                .NotEmpty().WithMessage("Ошибка проверки каптчи");
+            /*RuleFor(x => x.CaptchaToken)
+                .NotEmpty().WithMessage("Ошибка проверки каптчи");*/
         }
     }
 }

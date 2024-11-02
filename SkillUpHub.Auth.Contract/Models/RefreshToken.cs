@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Security.Cryptography;
 using UUIDNext;
 
-namespace SkillUpHub.Auth.Contract.Models;
+namespace SkillUpHub.Command.Contract.Models;
 
 public class RefreshToken(
     Guid id,
@@ -13,7 +14,7 @@ public class RefreshToken(
     Guid userId)
 {
     public Guid Id { get; } = id;
-    public string Token { get; private set; } = token;
+    public string Token { get; set; } = token;
     public DateTime ExpiryDate { get; private set; } = expiryDate;
     public bool IsRevoked { get; private set; }
     public string Fingerprint { get; private set; } = fingerprint;
@@ -37,5 +38,15 @@ public class RefreshToken(
     public bool TokenIsValid(string token, string fingerprint, string userAgent)
     {
         return Token == token && Fingerprint == fingerprint && UserAgent == userAgent && ExpiryDate < DateTime.UtcNow && !IsRevoked;
+    }
+    
+    public static string GenerateRefreshToken(int length = 32)
+    {
+        var randomNumber = new byte[length];
+
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomNumber);
+
+        return Convert.ToBase64String(randomNumber);
     }
 }

@@ -18,6 +18,12 @@ namespace SkillUpHub.Command.Application.Handlers.LoginIn
             RuleFor(x => x.Password)
                 .MinimumLength(8).WithMessage("Минимальная длина пароля 8 символов")
                 .MaximumLength(25).WithMessage("Максимальная длина пароля 25 символов");
+
+            RuleFor(x => x.FingerPrint)
+                .NotEmpty().WithMessage("Не удалось получить идентификатор пользователя");
+
+            RuleFor(x => x.UserAgent)
+                .NotEmpty().WithMessage("Не удалось получить идентификатор браузера");
         }
     }
 }

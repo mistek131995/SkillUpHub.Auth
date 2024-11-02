@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace SkillUpHub.Command.Application.Handlers.LoginIn
 {
-    public class Command : IRequest<(string accessToken, string refreshToken)>
+    public class Command : IRequest<string>
     {
         public string Login {  get; set; }
         public string Password { get; set; }
         public string UserAgent { get; set; }
         public string FingerPrint { get; set; }
-        public string? RefreshToken { get; set; }
     }
 }
