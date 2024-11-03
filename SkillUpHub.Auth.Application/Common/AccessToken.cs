@@ -2,20 +2,21 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using SkillUpHub.Auth.Contract.Models;
 
 namespace SkillUpHub.Command.Application.Common;
 
 public class AccessToken
 {
-    public static string GenerateAccessToken(string secretKey, string login)
+    public static string GenerateAccessToken(string secretKey, User user)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         var claims = new Claim[]
         {
-            new Claim("Id", Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.Name, login),
+            new Claim("Id", user.Id.ToString()),
+            new Claim(ClaimTypes.Name, user.Login),
         };
 
         var token = new JwtSecurityToken(

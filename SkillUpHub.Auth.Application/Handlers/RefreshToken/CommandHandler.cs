@@ -14,9 +14,10 @@ public class CommandHandler(IRepositoryProvider repositoryProvider, IConfigurati
         var refreshTokenCookie = httpContextAccessor.HttpContext!.Request.Cookies["refreshToken"];
 
         if (string.IsNullOrEmpty(refreshTokenCookie))
-            throw new HandledException("Время вашей сессии истекло. Пожалуйста, войдите в свой аккаунт заново, чтобы продолжить работу");
+            throw new UnauthorizedAccessException("Время вашей сессии истекло. Пожалуйста, войдите в свой аккаунт заново, чтобы продолжить работу");
 
-        var refreshToken = await repositoryProvider.RefreshTokenRepository.GetByToken(refreshTokenCookie);
+        var refreshToken = await repositoryProvider.RefreshTokenRepository.GetByToken(refreshTokenCookie) ?? 
+            throw new UnauthorizedAccessException("Время вашей сессии истекло. Пожалуйста, войдите в свой аккаунт заново, чтобы продолжить работу");
 
         if(refreshToken.TokenIsValid(refreshTokenCookie, request.FingerPrint, request.UserAgent))
         {
@@ -26,9 +27,9 @@ public class CommandHandler(IRepositoryProvider repositoryProvider, IConfigurati
             await repositoryProvider.RefreshTokenRepository.SaveAsync(refreshToken);
             httpContextAccessor.HttpContext!.Response.Cookies.Append("refreshToken", refreshToken.Token);
             
-            return AccessToken.GenerateAccessToken(configuration.GetSection("SecretKey").Value!, user.Login);
+            return AccessToken.GenerateAccessToken(configuration.GetSection("SecretKey").Value!, user);
         }
         
-        throw new HandledException("Время вашей сессии истекло. Пожалуйста, войдите в свой аккаунт заново, чтобы продолжить работу");
+        throw new UnauthorizedAccessException("Время вашей сессии истекло. Пожалуйста, войдите в свой аккаунт заново, чтобы продолжить работу");
     }
 }

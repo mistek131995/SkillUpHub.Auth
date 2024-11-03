@@ -11,22 +11,22 @@ namespace SkillUpHub.Command.Application.Handlers.LoginIn
     {
         public async Task<string> Handle(Command request, CancellationToken cancellationToken)
         {
-            var dbUser = await repositoryProvider.UserRepository.GetByLoginAsync(request.Login) ??
+            var user = await repositoryProvider.UserRepository.GetByLoginAsync(request.Login) ??
                          throw new HandledException("Пользователь с таким логином и паролем не найден");
 
-            if (dbUser.IsPasswordValid(request.Password))
+            if (user.IsPasswordValid(request.Password))
             {
-                var accessToken = AccessToken.GenerateAccessToken(configuration.GetSection("SecretKey").Value!, request.Login);
+                var accessToken = AccessToken.GenerateAccessToken(configuration.GetSection("SecretKey").Value!, user);
                 var refreshToken = Contract.Models.RefreshToken.GenerateRefreshToken();
 
-                var userRefreshTokens = await repositoryProvider.RefreshTokenRepository.GetByUserIdAsync(dbUser.Id);
+                var userRefreshTokens = await repositoryProvider.RefreshTokenRepository.GetByUserIdAsync(user.Id);
                 var curToken = userRefreshTokens
                     .FirstOrDefault(x => x.UserAgent == request.UserAgent && x.Fingerprint == request.FingerPrint);
 
                 if (curToken != null)
                     curToken.Update(refreshToken);
                 else
-                    curToken = new Contract.Models.RefreshToken(refreshToken, request.FingerPrint, request.UserAgent, dbUser.Id);
+                    curToken = new Contract.Models.RefreshToken(refreshToken, request.FingerPrint, request.UserAgent, user.Id);
 
                 await repositoryProvider.RefreshTokenRepository.SaveAsync(curToken);
                 
