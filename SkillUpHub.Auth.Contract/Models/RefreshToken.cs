@@ -37,7 +37,7 @@ public class RefreshToken(
 
     public bool TokenIsValid(string token, string fingerprint, string userAgent)
     {
-        return Token == token && Fingerprint == fingerprint && UserAgent == userAgent && ExpiryDate < DateTime.UtcNow && !IsRevoked;
+        return Token == token && Fingerprint == fingerprint && UserAgent == userAgent && ExpiryDate > DateTime.UtcNow && !IsRevoked;
     }
     
     public static string GenerateRefreshToken(int length = 32)
