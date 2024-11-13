@@ -15,7 +15,7 @@ public class AccessToken
 
         var claims = new Claim[]
         {
-            new Claim("Id", user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Login),
         };
 

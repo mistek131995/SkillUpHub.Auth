@@ -28,6 +28,12 @@ public class ExceptionHandlerMiddleware(RequestDelegate next)
             context.Response.StatusCode = (int)HttpStatusCode.Conflict;
             context.Response.WriteAsJsonAsync(exception.Message);
         }
+        else if (type == typeof(RefreshTokenException))
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.WriteAsJsonAsync(exception.Message);
+        }
         else
         {
             Console.WriteLine(exception.Message);
