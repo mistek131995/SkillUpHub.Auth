@@ -5,9 +5,9 @@ using SkillUpHub.Command.Application.Exceptions;
 
 namespace SkillUpHub.Command.Application.Handlers.CreateUser
 {
-    public class CommandHandler(IRepositoryProvider repositoryProvider, IMessageBusClient messageBusClient) : IRequestHandler<Command, Guid>
+    public class CommandHandler(IRepositoryProvider repositoryProvider, IMessageBusClient messageBusClient) : IRequestHandler<Command, Unit>
     {
-        public async Task<Guid> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
         {
             var dbUser = await repositoryProvider.UserRepository.GetByLoginAsync(request.Login);
 
@@ -21,9 +21,13 @@ namespace SkillUpHub.Command.Application.Handlers.CreateUser
 
             dbUser = await repositoryProvider.UserRepository.SaveAsync(new User(request.Login, request.Password, request.Email));
 
-            messageBusClient.PublishMessage(dbUser.Id, "createUser");
+            messageBusClient.PublishMessage(new
+            {
+                UserId = dbUser.Id,
+                SessionId = request.SessionId,
+            }, "createUser");
 
-            return dbUser.Id;
+            return Unit.Value;
         }
     }
 }
