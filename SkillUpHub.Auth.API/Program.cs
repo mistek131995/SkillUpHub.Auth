@@ -1,17 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using SkillUpHub.Auth.Extensions;
-using SkillUpHub.Auth.Infrastructure.Clients;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Auth.Middlewares;
 using SkillUpHub.Command.Application;
+using SkillUpHub.Command.Infrastructure.Clients;
+using SkillUpHub.Command.Infrastructure.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCommands(builder.Configuration.GetConnectionString("DefaultConnection")!);
+builder.Services.AddCommands(builder.Configuration);
 
-builder.Services.AddScoped<IMessageBusClient, RabbitMqClient>(x =>
-    new RabbitMqClient(builder.Configuration.GetSection("RabbitMqHost").Value));
+builder.Services.AddScoped<IMessageBusClient, RabbitMqClient>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -43,9 +43,13 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<PGContext>();
     dbContext.Database.Migrate();
+    
+    var rabbitMqService = scope.ServiceProvider.GetRequiredService<IMessageBusClient>();
+    rabbitMqService!.Initialize();
 }
 
 app.UseCors("AllowAll");
 app.RegisterRoutes();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
+
 app.Run();

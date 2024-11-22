@@ -1,9 +1,8 @@
-﻿using System;
-
-namespace SkillUpHub.Auth.Infrastructure.Interfaces;
+﻿namespace SkillUpHub.Command.Infrastructure.Interfaces;
 
 public interface IMessageBusClient
 {
-    void PublishMessage<T>(T message, string routingKey);
+    void Initialize();
+    void PublishMessage<T>(T message, string exchange, string routingKey);
     //void SubscribeAsync<T>(string queueName, Action<T> onMessageReceived);
 }
