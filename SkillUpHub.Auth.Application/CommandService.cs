@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SkillUpHub.Auth.Infrastructure.Contexts;
-using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Command.Application.Behaviors;
 using SkillUpHub.Command.Contract.Models;
+using SkillUpHub.Command.Infrastructure.Interfaces;
 using SkillUpHub.Command.Infrastructure.Providers;
 
 namespace SkillUpHub.Command.Application

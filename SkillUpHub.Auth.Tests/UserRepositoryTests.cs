@@ -5,6 +5,7 @@ using Xunit;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Repositories;
 using SkillUpHub.Auth.Contract.Models;
+using SkillUpHub.Command.Infrastructure.Repositories;
 using EUser = SkillUpHub.Auth.Infrastructure.Entities.User;
 
 public class UserRepositoryTests

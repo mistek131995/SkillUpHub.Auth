@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SkillUpHub.Auth.Contract.Models;
-using SkillUpHub.Auth.Contract.Repositories;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Infrastructure.Mappers;
+using SkillUpHub.Command.Contract.Repositories;
 
-namespace SkillUpHub.Auth.Infrastructure.Repositories
+namespace SkillUpHub.Command.Infrastructure.Repositories
 {
     public class UserRepository(PGContext context) : IUserRepository
     {
@@ -70,6 +70,13 @@ namespace SkillUpHub.Auth.Infrastructure.Repositories
             await context.SaveChangesAsync();
             
             return new User(dbUser.Id, dbUser.Login, dbUser.Password, dbUser.Email);
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var user = await context.Users.FindAsync(id);
+            context.Users.Remove(user);
+            await context.SaveChangesAsync();
         }
     }
 }

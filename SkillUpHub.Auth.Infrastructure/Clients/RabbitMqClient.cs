@@ -1,7 +1,10 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using SkillUpHub.Command.Contract.Models;
 using SkillUpHub.Command.Infrastructure.Interfaces;
 
@@ -64,6 +67,31 @@ public sealed class RabbitMqClient : IMessageBusClient
             body: body);
     }
     
+    public void PublishErrorMessage(Exception exception)
+    {
+        _channel.QueueDeclare("logger", durable: true, exclusive: false, autoDelete: false, arguments: null);
+        var jsonMessage = JsonConvert.SerializeObject(exception);
+        var body = Encoding.UTF8.GetBytes(jsonMessage);
+
+        _channel.BasicPublish(exchange: "",
+            routingKey: "logger",
+            basicProperties: null,
+            body: body);
+    }
+
+    public void Subscribe<T>(string queueName, Func<T, Task> onMessageReceived)
+    {
+        var consumer = new EventingBasicConsumer(_channel);
+        consumer.Received += (model, ea) =>
+        {
+            var body = ea.Body.ToArray();
+            var message = Encoding.UTF8.GetString(body);
+            var deserializedMessage = JsonConvert.DeserializeObject<T>(message);
+            onMessageReceived(deserializedMessage);
+        };
+        _channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+    }
+
     public void Dispose()
     {
         _channel?.Close();

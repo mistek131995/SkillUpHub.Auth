@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using SkillUpHub.Auth.Contract.Models;
 using SkillUpHub.Auth.Data.Interfaces;
 
-namespace SkillUpHub.Auth.Contract.Repositories
+namespace SkillUpHub.Command.Contract.Repositories
 {
     public interface IUserRepository : IBaseRepository
     {
@@ -16,5 +16,7 @@ namespace SkillUpHub.Auth.Contract.Repositories
         
         
         Task<User> SaveAsync(User user);
+        
+        Task DeleteAsync(Guid id);
     }
 }

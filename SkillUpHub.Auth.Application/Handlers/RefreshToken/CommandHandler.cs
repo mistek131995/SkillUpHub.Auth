@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Command.Application.Common;
 using SkillUpHub.Command.Application.Exceptions;
+using SkillUpHub.Command.Infrastructure.Interfaces;
 
 namespace SkillUpHub.Command.Application.Handlers.RefreshToken;
 

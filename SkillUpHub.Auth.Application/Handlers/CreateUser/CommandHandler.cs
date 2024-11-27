@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Options;
 using SkillUpHub.Auth.Contract.Models;
-using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Command.Application.Exceptions;
 using SkillUpHub.Command.Contract.Models;
 using SkillUpHub.Command.Infrastructure.Interfaces;

@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Configuration;
-using SkillUpHub.Auth.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Http;
 using SkillUpHub.Command.Application.Common;
 using SkillUpHub.Command.Application.Exceptions;
+using SkillUpHub.Command.Infrastructure.Interfaces;
 
 namespace SkillUpHub.Command.Application.Handlers.LoginIn
 {

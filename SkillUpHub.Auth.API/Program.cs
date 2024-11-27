@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SkillUpHub.Auth.Extensions;
 using SkillUpHub.Auth.Infrastructure.Contexts;
-using SkillUpHub.Auth.Infrastructure.Interfaces;
 using SkillUpHub.Auth.Middlewares;
 using SkillUpHub.Command.Application;
 using SkillUpHub.Command.Infrastructure.Clients;
