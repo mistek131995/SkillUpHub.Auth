@@ -17,7 +17,7 @@ public class RabbitMqListenerService(
         using var scope = serviceProvider.CreateScope();
         var rabbitMqMessageHandler = scope.ServiceProvider.GetService<IRabbitMqMessageHandler>()!;
         
-        messageBusClient.Subscribe("create-user-failure.rollback-account", async (Guid id) 
+        messageBusClient.Subscribe("create-user.rollback-account", async (Guid id) 
             => await rabbitMqMessageHandler.RollbackAccountAsync(id));
         
         return Task.CompletedTask;
