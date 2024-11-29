@@ -3,14 +3,11 @@ using SkillUpHub.Auth.Extensions;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Auth.Middlewares;
 using SkillUpHub.Command.Application;
-using SkillUpHub.Command.Infrastructure.Clients;
 using SkillUpHub.Command.Infrastructure.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCommands(builder.Configuration);
-
-builder.Services.AddScoped<IMessageBusClient, RabbitMqClient>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

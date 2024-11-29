@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SkillUpHub.Auth.Infrastructure.Contexts;
 using SkillUpHub.Command.Application.Behaviors;
+using SkillUpHub.Command.Application.Extenstions;
 using SkillUpHub.Command.Contract.Models;
 using SkillUpHub.Command.Infrastructure.Interfaces;
 using SkillUpHub.Command.Infrastructure.Providers;
@@ -15,7 +16,7 @@ namespace SkillUpHub.Command.Application
     {
         public static IServiceCollection AddCommands(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<RabbitMqSettings>(configuration.GetSection("RabbitMqSettings"));
+            services.AddRabbitMq(configuration);
             
             services.AddDbContext<PGContext>(option => 
                 option.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));

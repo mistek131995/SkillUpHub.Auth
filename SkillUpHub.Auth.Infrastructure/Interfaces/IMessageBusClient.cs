@@ -5,8 +5,8 @@ namespace SkillUpHub.Command.Infrastructure.Interfaces;
 
 public interface IMessageBusClient
 {
-    void Initialize();
-    void PublishMessage<T>(T message, string exchange, string routingKey);
-    void PublishErrorMessage(Exception exception);
-    void Subscribe<T>(string queueName, Func<T, Task> onMessageReceived);
+    Task Initialize();
+    Task PublishMessage<T>(T message, string exchange, string routingKey);
+    Task PublishErrorMessage(Exception exception);
+    Task Subscribe<T>(string queueName, Func<T, Task> onMessageReceived);
 }

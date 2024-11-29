@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -12,36 +13,34 @@ namespace SkillUpHub.Command.Infrastructure.Clients;
 
 public sealed class RabbitMqClient : IMessageBusClient
 {
-    private readonly IConnection _connection;
-    private readonly IModel _channel;
     private readonly IOptions<RabbitMqSettings> _options;
 
     public RabbitMqClient(IOptions<RabbitMqSettings> options)
     {
-        var factory = new ConnectionFactory()
-        {
-            HostName = options.Value.Host
-        };
-        
-        _connection = factory.CreateConnection();
-        _channel = _connection.CreateModel();
         _options = options;
     }
 
-    public void Initialize()
+    public async Task Initialize()
     {
+        var factory = new ConnectionFactory()
+        {
+            HostName = _options.Value.Host
+        };
+        var connection = await factory.CreateConnectionAsync();
+        var channel = await connection.CreateChannelAsync();
+        
         if (_options.Value.Exchanges is { Count: > 0 })
         {
             foreach (var exchange in _options.Value.Exchanges)
             {
-                _channel.ExchangeDeclare(exchange.Name, exchange.Type, exchange.Durable, exchange.AutoDelete);
+                await channel.ExchangeDeclareAsync(exchange.Name, exchange.Type, exchange.Durable, exchange.AutoDelete);
 
                 if (exchange.Queues is { Count: > 0 })
                 {
                     foreach (var queue in exchange.Queues)
                     {
-                        _channel.QueueDeclare(queue.Name, queue.Durable, queue.AutoDelete, queue.Exclusive);
-                        _channel.QueueBind(queue.Name, exchange.Name, queue.Key);
+                        await channel.QueueDeclareAsync(queue.Name, queue.Durable, queue.AutoDelete, queue.Exclusive);
+                        await channel.QueueBindAsync(queue.Name, exchange.Name, queue.Key);
                     }
                 }
             }
@@ -51,50 +50,66 @@ public sealed class RabbitMqClient : IMessageBusClient
         {
             foreach (var queue in _options.Value.Queues)
             {
-                _channel.QueueDeclare(queue.Name, queue.Durable, queue.Exclusive, queue.AutoDelete);
+                await channel.QueueDeclareAsync(queue.Name, queue.Durable, queue.Exclusive, queue.AutoDelete);
             }
         }
     }
 
-    public void PublishMessage<T>(T message, string exchange, string routingKey)
+    public async Task PublishMessage<T>(T message, string exchange, string routingKey)
     {
+        var factory = new ConnectionFactory()
+        {
+            HostName = _options.Value.Host
+        };
+        var connection = await factory.CreateConnectionAsync();
+        var channel = await connection.CreateChannelAsync();
+        
         var jsonMessage = JsonConvert.SerializeObject(message);
         var body = Encoding.UTF8.GetBytes(jsonMessage);
-
-        _channel.BasicPublish(exchange: exchange,
+        
+        await channel.BasicPublishAsync(exchange: exchange,
             routingKey: routingKey,
-            basicProperties: null,
             body: body);
     }
     
-    public void PublishErrorMessage(Exception exception)
+    public async Task PublishErrorMessage(Exception exception)
     {
-        _channel.QueueDeclare("logger", durable: true, exclusive: false, autoDelete: false, arguments: null);
+        var factory = new ConnectionFactory()
+        {
+            HostName = _options.Value.Host
+        };
+        var connection = await factory.CreateConnectionAsync();
+        var channel = await connection.CreateChannelAsync();
+        
+        await channel.QueueDeclareAsync("logger", durable: true, exclusive: false, autoDelete: false, arguments: null);
         var jsonMessage = JsonConvert.SerializeObject(exception);
         var body = Encoding.UTF8.GetBytes(jsonMessage);
 
-        _channel.BasicPublish(exchange: "",
+        await channel.BasicPublishAsync(exchange: "",
             routingKey: "logger",
-            basicProperties: null,
             body: body);
     }
 
-    public void Subscribe<T>(string queueName, Func<T, Task> onMessageReceived)
+    public async Task Subscribe<T>(string queueName, Func<T, Task> onMessageReceived)
     {
-        var consumer = new EventingBasicConsumer(_channel);
-        consumer.Received += (model, ea) =>
+        var factory = new ConnectionFactory()
+        {
+            HostName = _options.Value.Host
+        };
+        var connection = await factory.CreateConnectionAsync();
+        var channel = await connection.CreateChannelAsync();
+        
+        var consumer = new AsyncEventingBasicConsumer(channel);
+        consumer.ReceivedAsync += (model, ea) =>
         {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
             var deserializedMessage = JsonConvert.DeserializeObject<T>(message);
             onMessageReceived(deserializedMessage);
+            
+            return Task.CompletedTask;
         };
-        _channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
-    }
-
-    public void Dispose()
-    {
-        _channel?.Close();
-        _connection?.Close();
+        
+        await channel.BasicConsumeAsync(queue: queueName, autoAck: true, consumer: consumer);
     }
 }
